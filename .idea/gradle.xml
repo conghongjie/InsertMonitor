@@ -9,11 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/insert_monitor_offline" />
-            <option value="$PROJECT_DIR$/insert_monitor_offline_plugin" />
-            <option value="$PROJECT_DIR$/insert_monitor_online" />
-            <option value="$PROJECT_DIR$/insert_monitor_online_plugin" />
-            <option value="$PROJECT_DIR$/insert_monitor_storage" />
+            <option value="$PROJECT_DIR$/insert_monitor" />
+            <option value="$PROJECT_DIR$/insert_monitor_analysis" />
+            <option value="$PROJECT_DIR$/insert_monitor_plugin" />
             <option value="$PROJECT_DIR$/insert_monitor_ui" />
           </set>
         </option>

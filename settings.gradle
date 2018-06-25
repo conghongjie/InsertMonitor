@@ -1,1 +1,1 @@
-include ':app', ':insert_monitor_online', ':insert_monitor_offline', ':insert_monitor_ui', ':insert_monitor_online_plugin', ':insert_monitor_offline_plugin', ':insert_monitor_storage'
+include ':app', ':insert_monitor_ui', ':insert_monitor_plugin', ':insert_monitor', ':insert_monitor_analysis'

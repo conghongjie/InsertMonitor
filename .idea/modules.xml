@@ -4,11 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/InsertMonitor.iml" filepath="$PROJECT_DIR$/InsertMonitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/insert_monitor_offline/insert_monitor_offline.iml" filepath="$PROJECT_DIR$/insert_monitor_offline/insert_monitor_offline.iml" />
-      <module fileurl="file://$PROJECT_DIR$/insert_monitor_offline_plugin/insert_monitor_offline_plugin.iml" filepath="$PROJECT_DIR$/insert_monitor_offline_plugin/insert_monitor_offline_plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/insert_monitor_online/insert_monitor_online.iml" filepath="$PROJECT_DIR$/insert_monitor_online/insert_monitor_online.iml" />
-      <module fileurl="file://$PROJECT_DIR$/insert_monitor_online_plugin/insert_monitor_online_plugin.iml" filepath="$PROJECT_DIR$/insert_monitor_online_plugin/insert_monitor_online_plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/insert_monitor_storage/insert_monitor_storage.iml" filepath="$PROJECT_DIR$/insert_monitor_storage/insert_monitor_storage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insert_monitor/insert_monitor.iml" filepath="$PROJECT_DIR$/insert_monitor/insert_monitor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insert_monitor_analysis/insert_monitor_analysis.iml" filepath="$PROJECT_DIR$/insert_monitor_analysis/insert_monitor_analysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insert_monitor_plugin/insert_monitor_plugin.iml" filepath="$PROJECT_DIR$/insert_monitor_plugin/insert_monitor_plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/insert_monitor_ui/insert_monitor_ui.iml" filepath="$PROJECT_DIR$/insert_monitor_ui/insert_monitor_ui.iml" />
     </modules>
   </component>
