@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.elvis.android.lib.insert_monitor">
 
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
     <application
         android:name=".demo.MainApplication"
         android:allowBackup="true"
@@ -10,13 +17,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.elvis.android.lib.insert_monitor.demo.MainActivity">
+        <activity android:name="com.gtr.test.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.gtr.test.Test_Block_Activity" />
+        <activity android:name="com.gtr.test.Test_DB_Activity" />
+        <activity android:name="com.gtr.test.Test_File_Activity" />
+        <activity android:name="com.gtr.test.Test_Fragment_Activity" />
+        <activity android:name="com.gtr.test.Test_FragmentV4_Activity" />
+        <activity android:name="com.gtr.test.Test_FragmentV4_Switch_Activity" />
+        <activity android:name="com.gtr.test.Test_Memory_Activity" />
+        <activity android:name="com.gtr.test.Test_Operation_Activity" />
+        <activity android:name="com.gtr.test.Test_ViewBuild_Activity" />
+        <activity android:name="com.gtr.test.Test_WebView_Activity" />
+        <activity android:name="com.gtr.test.test.Test_Test_Activity" />
+        <activity android:name="com.gtr.test.Test_Bitmap_Activity" />
     </application>
 
 </manifest>

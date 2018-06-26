@@ -16,7 +16,7 @@ public abstract class AbsInfo {
     long dataTime;
 
     public AbsInfo(long dataTime){
-        this.dataType = this.getClass().getName();
+        this.dataType = this.getClass().getSimpleName();
         this.dataTime = dataTime;
     }
 

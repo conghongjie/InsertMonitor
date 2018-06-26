@@ -11,8 +11,11 @@ import android.os.Looper;
 import android.view.Choreographer;
 
 import com.elvis.android.insert_monitor.collect.AbsCollector;
-import com.elvis.android.insert_monitor.obj.info.FrameInfo;
+import com.elvis.android.insert_monitor.obj.info.BlockInfo;
+import com.elvis.android.insert_monitor.obj.info.SMInfo;
 import com.elvis.android.insert_monitor.obj.info.StackInfo;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -60,7 +63,7 @@ public class FrameCollector extends AbsCollector {
 
 
     /**
-     * 采集线程
+     * 栈采集任务（当应用处于后台时，暂停采集）
      */
     private HandlerThread handlerThread = null;
     private Handler handler = null;
@@ -72,9 +75,6 @@ public class FrameCollector extends AbsCollector {
         }
     }
 
-    /**
-     * 栈采集任务（当应用处于后台时，暂停采集）
-     */
     public int handlerThreadId = -1;
     private Thread uiThread = Looper.getMainLooper().getThread();
     private int interval = 30;//采集间隔--30ms
@@ -94,30 +94,100 @@ public class FrameCollector extends AbsCollector {
             StackInfo stackInfo = new StackInfo(time);
             stackInfo.time = time;
             stackInfo.stack = stack;
-            sender.send(stackInfo,false);
+            onStack(stackInfo);
             handler.postDelayed(stackCollectRunnable, interval);
         }
     };
+
+    private ArrayList<StackInfo> stackInfos = new ArrayList<>();
+    private void onStack(StackInfo stackInfo){
+        synchronized (stackInfos){
+            stackInfos.add(stackInfo);
+            while (stackInfos.size()>50){
+                stackInfos.remove(0);
+            }
+        }
+    }
+    private ArrayList<StackInfo> getStackInfos(long start,long end){
+        ArrayList<StackInfo> temps = new ArrayList<>();
+        synchronized (stackInfos){
+            for (int i=0;i<stackInfos.size();i++){
+                StackInfo stackInfo = stackInfos.get(i);
+                if (stackInfo.time>=start &&stackInfo.time<=end){
+                    temps.add(stackInfo);
+                }
+            }
+        }
+        return temps;
+    }
 
 
 
     /**
      * Frame采集任务（当应用处于后台时，暂停采集）
      */
+    long nowSm = 0;
+    ArrayList<Long> framesInOneSecond = new ArrayList<>();//1s内所有frame的时间
+    //sm值：
+    final long frameCollectSection = 200;                       //采集区间:200ms
+    long lastCollectSmTime = 0;
+    //大卡顿：
+    final long bigBlockFrameLimit = 70;                         //大卡顿：Frame间隔限制
+    long lastFrameTime = 0;
+    //连续小卡顿：
+    final long serialBlockSMLimit = 40;                         //连续小卡顿：sm限制
+    long serialBlockStartTime = 0;
+    int serialBlockFrameNum = 0;
     private Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {//系统绘帧回调
-        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         public void doFrame(long frameTimeNanos) {
-            long thisTime = System.currentTimeMillis();
             //关闭栈采集
             handler.removeCallbacks(stackCollectRunnable);
+            //数据处理：
             long time = System.currentTimeMillis();
-            //封装发送数据：
-            FrameInfo frameInfo = new FrameInfo(time);
-            frameInfo.time = time;
-            sender.send(frameInfo,false);
-            //开启下一个doFrame监控
+            framesInOneSecond.add(time);
+            nowSm++;
+            while (framesInOneSecond.size()>0 && framesInOneSecond.get(0)<time-1000){
+                framesInOneSecond.remove(0);
+                nowSm--;
+            }
+            //sm：
+            if (time-lastCollectSmTime>frameCollectSection){
+                lastCollectSmTime = time;
+                SMInfo smInfo = new SMInfo(time);
+                smInfo.time = time;
+                smInfo.sm = nowSm;
+                sender.send(smInfo,false);
+            }
+            //大卡顿：
+            if (lastFrameTime!=0 && time-lastFrameTime>bigBlockFrameLimit){
+                BlockInfo blockInfo = new BlockInfo(time);
+                blockInfo.startTime = lastFrameTime;
+                blockInfo.endTime = time;
+                blockInfo.frameNum = 1;
+                blockInfo.stackInfos = getStackInfos(blockInfo.startTime,blockInfo.endTime);
+                sender.send(blockInfo,false);
+
+            }
+            lastFrameTime = time;
+            //连续卡顿：
+            if(serialBlockStartTime==0 && nowSm<serialBlockSMLimit){
+                serialBlockStartTime = time;
+                serialBlockFrameNum = 0;
+            }else if (serialBlockStartTime!=0){
+                if (nowSm<serialBlockSMLimit){
+                    serialBlockFrameNum++;
+                }else {
+                    BlockInfo blockInfo = new BlockInfo(time);
+                    blockInfo.startTime = lastFrameTime;
+                    blockInfo.endTime = time;
+                    blockInfo.frameNum = serialBlockFrameNum;
+                    blockInfo.stackInfos = getStackInfos(blockInfo.startTime,blockInfo.endTime);
+                    sender.send(blockInfo,false);
+                    serialBlockStartTime = 0;
+                }
+            }
+            //开启下一个监控
             Choreographer.getInstance().postFrameCallback(frameCallback);
-            //重启栈采集
             handler.postDelayed(stackCollectRunnable,interval);
         }
     };

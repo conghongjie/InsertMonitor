@@ -1,5 +1,7 @@
 package com.elvis.android.insert_monitor.data;
 
+import android.util.Log;
+
 import com.elvis.android.insert_monitor.obj.AbsInfo;
 
 /**
@@ -15,7 +17,7 @@ public class InsertMonitorDataHandler {
 
 
     public static void handleAIDLData(String infoString,boolean isUpload){
-//        Log.e("Elvis","info1:"+infoString);
+        Log.e("Elvis","info1:"+infoString);
     }
 
     public static void handleSelfData(AbsInfo info, boolean isUpload){

@@ -9,12 +9,13 @@ import org.json.JSONObject;
  * Created by conghongjie on 2018/6/20.
  */
 
-public class FrameInfo extends AbsInfo {
+public class SMInfo extends AbsInfo {
 
 
     public long time;
+    public long sm;
 
-    public FrameInfo(long dataTime) {
+    public SMInfo(long dataTime) {
         super(dataTime);
     }
 
@@ -24,5 +25,13 @@ public class FrameInfo extends AbsInfo {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public long getSm() {
+        return sm;
+    }
+
+    public void setSm(long sm) {
+        this.sm = sm;
     }
 }
