@@ -1,4 +1,4 @@
-//apply plugin: 'com.novoda.bintray-release'
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
@@ -10,11 +10,22 @@ dependencies {
 
 
 ////发布到jcenter Mavan库
+//apply plugin: 'com.novoda.bintray-release'
 //publish {
 //    userOrg = 'conghongjie00'//bintray.com用户名
 //    groupId = 'com.elvis.android'//jcenter上的路径
 //    artifactId = 'insert_monitor_plugin'//项目名称
-//    publishVersion = '1.0.0'//版本号
+//    publishVersion = '1.0.3'//版本号
 //    desc = 'monitor your Android App by insert code'//描述，不重要
 //    website = 'https://github.com/conghongjie/InsertMonitor'//github地址
 //}
+
+version = 1.0
+group = 'com.elvis.android'
+archivesBaseName = 'insert_monitor_plugin_local'
+repositories.mavenCentral()
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: 'file:../local_maven')
+    }
+}

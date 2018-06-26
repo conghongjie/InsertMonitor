@@ -1,4 +1,4 @@
-package com.elvis.android.insert_monitor.plugin.insert;
+package com.elvis.android.insert_monitor.plugin.class_visitor;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -16,7 +16,7 @@ import java.util.List;
  * Created by conghongjie on 2018/6/22.
  */
 
-public class IOInsert extends ClassVisitor{
+public class IOClassVisitor extends ClassVisitor{
 
 
     //探测的函数：
@@ -50,7 +50,7 @@ public class IOInsert extends ClassVisitor{
     // 此Class是否忽略
     boolean isThisClassNoDetect = false;
 
-    public IOInsert(ClassVisitor classVisitor, List<String> noDetectPackages) {
+    public IOClassVisitor(ClassVisitor classVisitor, List<String> noDetectPackages) {
         super(Opcodes.ASM5, classVisitor);
         this.noDetctPackages = noDetectPackages;
     }
@@ -81,8 +81,8 @@ public class IOInsert extends ClassVisitor{
             final MethodVisitor mv = this.cv.visitMethod(access, name, desc, signature, exceptions);
             AdviceAdapter mv1 = new AdviceAdapter(Opcodes.ASM5, mv, access, name, desc) {
                 public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean b) {
-                    if(owner.equals("android/database/sqlite/SQLiteDatabase") && IOInsert.isInsertMethod(name)) {
-                        this.mv.visitLdcInsn(name);
+                    if(owner.equals("android/database/sqlite/SQLiteDatabase") && IOClassVisitor.isInsertMethod(name)) {
+                        this.mv.visitLdcInsn(name+"sss");
                         this.mv.visitMethodInsn(INVOKESTATIC, "com/elvis/android/insert_monitor/plugin/insert/IOInsert", "onDBEvent", "(Ljava/lang/String;)V", false);
                     }
                     super.visitMethodInsn(opcode, owner, name, desc, b);

@@ -3,6 +3,7 @@ package com.elvis.android.insert_monitor.plugin
 import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
+import com.elvis.android.insert_monitor.plugin.class_visitor.IOClassVisitor
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Plugin
@@ -10,7 +11,6 @@ import org.gradle.api.Project
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
-import com.elvis.android.insert_monitor.plugin.CostClassVisitor
 
 import static org.objectweb.asm.ClassReader.EXPAND_FRAMES
 
@@ -56,31 +56,26 @@ public class InsertMonitorPlugin extends Transform implements Plugin<Project> {
         if (directoryInput.file.isDirectory()) {
           directoryInput.file.eachFileRecurse { File file ->
             def name = file.name
-            if (name.endsWith(".class") && !name.startsWith("R\$") &&
-                !"R.class".equals(name) && !"BuildConfig.class".equals(name)) {
+            if (name.endsWith(".class") && !name.startsWith("R\$") && !"R.class".equals(name) && !"BuildConfig.class".equals(name)) {
 
               println name + ' is changing...'
 
               ClassReader cr = new ClassReader(file.bytes)
               ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
-              ClassVisitor cv = new CostClassVisitor(cw)
+              ClassVisitor cv = new IOClassVisitor(cw,null)
 
               cr.accept(cv, EXPAND_FRAMES)
 
               byte[] code = cw.toByteArray()
 
-              FileOutputStream fos = new FileOutputStream(
-                  file.parentFile.absolutePath + File.separator + name)
+              FileOutputStream fos = new FileOutputStream(file.parentFile.absolutePath + File.separator + name)
               fos.write(code)
               fos.close()
             }
           }
         }
 
-        def dest = outputProvider.getContentLocation(directoryInput.name,
-            directoryInput.contentTypes, directoryInput.scopes,
-            Format.DIRECTORY)
-
+        def dest = outputProvider.getContentLocation(directoryInput.name, directoryInput.contentTypes, directoryInput.scopes, Format.DIRECTORY)
 
         FileUtils.copyDirectory(directoryInput.file, dest)
       }

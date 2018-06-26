@@ -2,11 +2,16 @@
 
 buildscript {
     repositories {
+        maven {
+            url 'file:../local_maven'
+        }
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.novoda:bintray-release:0.4.0'
+//        classpath 'com.elvis.android:insert_monitor_plugin:1.0.3'
+        classpath 'com.elvis.android:insert_monitor_plugin_local:1.0'
     }
 }
 

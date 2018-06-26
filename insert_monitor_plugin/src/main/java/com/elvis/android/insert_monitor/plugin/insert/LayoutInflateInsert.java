@@ -11,6 +11,18 @@ public class LayoutInflateInsert {
 
 
 
+    //setContentView(R.layout.activity_test_viewbuild);
+
+    //View v = inflater.inflate(R.layout.activity_main,null);
+
+
+
+
+
+
+
+
+
 
 
 }
