@@ -27,6 +27,8 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:appcompat-v7:25+'
+    compile 'org.aspectj:aspectjrt:1.8.9'
     compile project(path: ':insert_monitor')
 }
 
@@ -36,7 +38,7 @@ dependencies {
 //publish {
 //    userOrg = 'conghongjie00'//bintray.com用户名
 //    groupId = 'com.elvis.android'//jcenter上的路径
-//    artifactId = 'insert_monitor_ui'//项目名称
+//    artifactId = 'insert_monitor_aspectj'//项目名称
 //    publishVersion = '1.0.0'//版本号
 //    desc = 'monitor your Android App by insert code'//描述，不重要
 //    website = 'https://github.com/conghongjie/InsertMonitor'//github地址

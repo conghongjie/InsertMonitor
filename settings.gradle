@@ -1,1 +1,1 @@
-include ':app', ':insert_monitor_ui', ':insert_monitor_plugin', ':insert_monitor', ':insert_monitor_analysis'
+include ':app', ':insert_monitor_ui', ':insert_monitor_plugin', ':insert_monitor', ':insert_monitor_analysis', ':insert_monitor_aspectjx'

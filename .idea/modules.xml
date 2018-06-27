@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/insert_monitor/insert_monitor.iml" filepath="$PROJECT_DIR$/insert_monitor/insert_monitor.iml" />
       <module fileurl="file://$PROJECT_DIR$/insert_monitor_analysis/insert_monitor_analysis.iml" filepath="$PROJECT_DIR$/insert_monitor_analysis/insert_monitor_analysis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/insert_monitor_aspectjx/insert_monitor_aspectjx.iml" filepath="$PROJECT_DIR$/insert_monitor_aspectjx/insert_monitor_aspectjx.iml" />
       <module fileurl="file://$PROJECT_DIR$/insert_monitor_plugin/insert_monitor_plugin.iml" filepath="$PROJECT_DIR$/insert_monitor_plugin/insert_monitor_plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/insert_monitor_ui/insert_monitor_ui.iml" filepath="$PROJECT_DIR$/insert_monitor_ui/insert_monitor_ui.iml" />
     </modules>

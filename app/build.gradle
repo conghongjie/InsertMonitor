@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'insert_monitor_plugin'
+//采用aspectjx插件
+apply plugin: 'android-aspectjx'
+//暂时不采用asm插件
+//apply plugin: 'insert_monitor_plugin'
 
 android {
     compileSdkVersion 25
@@ -25,17 +28,22 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
-    //    compile project(path: ':smart_start')
-    //    compile 'com.elvis.android:smart_start:1.0.2'
+
     compile 'com.google.code.gson:gson:2.8.5'
     compile 'com.alibaba:fastjson:1.1.68.android'
-    compile project(path: ':insert_monitor')
+
+
+    //insert接入方式：
+    compile project(path: ':insert_monitor_aspectjx')
+    compile project(path: ':insert_monitor_ui')
+
 //    compile files('libs/db_detect-1.0.0.2.jar')
+}
+
+
+aspectjx {
+//关闭AspectJX功能
+    enabled true
 }

@@ -59,6 +59,12 @@ public class Test_DB_Activity extends Activity {
         }).start();
 
 
+        ss();
+
+    }
+
+    public static void ss(){
+
     }
 
 

@@ -39,14 +39,43 @@ Insert Monitor 是针对Android线上线下性能监控的基础库，支持自�
 
 8）线程分析
 
+### 实现原理：
 
+框架的基本实现原理是
 
+有两种实现方式：
+
+一、asm方式：遍历Manifest的Activity插桩（监控Activity生命周期）
+
+二、aspectjx方式：反射替换Instrument对象（监控Activity生命周期）
 
 ### 接入方式：
 
-//TODO
-//TODO
-//TODO
+一、asm方式：
+
+    dependencies {
+        classpath 'com.elvis.android:insert_monitor_plugin:1.0.3'
+    }
+
+    apply plugin: 'insert_monitor_plugin'
+
+    dependencies {
+        compile project(path: ':insert_monitor')
+        compile project(path: ':insert_monitor_ui')
+    }
+
+二、aspectjx方式：
+
+    dependencies {
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0'
+    }
+
+    apply plugin: 'android-aspectjx'
+
+    dependencies {
+        compile project(path: ':insert_monitor_aspectjx')
+        compile project(path: ':insert_monitor_ui')
+    }
 
 ### 项目结构：
 
