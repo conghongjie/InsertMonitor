@@ -26,14 +26,14 @@ public class AspectJxDB {
     public SQLiteDatabase onDBGetWritableDatabase(ProceedingJoinPoint joinPoint) throws Throwable {
         SQLiteDatabase result = null;
         //检测是否在主线程
-        if (ThreadUtils.isMainThread()){
+        if (IOCollector.isStart() && ThreadUtils.isMainThread()){
             long start = System.currentTimeMillis();
             result = (SQLiteDatabase) joinPoint.proceed();
             long end = System.currentTimeMillis();
             DBInfo dbInfo = new DBInfo(start);
             dbInfo.startTime = start;
             dbInfo.endTime = end;
-            dbInfo.method = "getWritableDatabase()";
+            dbInfo.methodName = DBInfo.METHOD_getWritableDatabase;
             dbInfo.stack = StackUtils.getStack(Thread.currentThread());
             dbInfo.sql = "";
             IOCollector.sendInfo(dbInfo,false);

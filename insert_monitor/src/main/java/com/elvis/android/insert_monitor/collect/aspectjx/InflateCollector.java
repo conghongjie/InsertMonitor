@@ -1,35 +1,39 @@
 package com.elvis.android.insert_monitor.collect.aspectjx;
 
-import android.annotation.TargetApi;
-import android.os.Build;
+import android.content.Context;
 
 import com.elvis.android.insert_monitor.collect.ISender;
 import com.elvis.android.insert_monitor.obj.AbsInfo;
 
 /**
- *
- * Created by conghongjie on 2018/6/24.
+ * Created by conghongjie on 2018/6/28.
  */
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class IOCollector {
+public class InflateCollector {
+
+    public static final int MAX_INFLATE_TIME = 10;
 
     private static ISender sender;
+    private static Context context;
     private static boolean isStart = false;
 
-
-
-    public static void start(ISender sender){
-        IOCollector.sender = sender;
-        isStart = true;
+    public static void start(ISender sender, Context context){
+        InflateCollector.sender = sender;
+        InflateCollector.context =context;
+        InflateCollector.isStart = true;
     }
     public static void stop(){
-        isStart = false;
+        InflateCollector.isStart = false;
+        InflateCollector.context = null;
         sender = null;
     }
 
     public static boolean isStart() {
         return isStart;
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public static void sendInfo(AbsInfo info, boolean isUpload){
@@ -40,10 +44,4 @@ public class IOCollector {
         }catch (Exception e){
         }
     }
-
-
-
-
-
-
 }

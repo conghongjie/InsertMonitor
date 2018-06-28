@@ -11,7 +11,16 @@ import java.util.ArrayList;
 public class ActivityInfo extends AbsInfo{
 
 
-    public String activityName;
+
+    public static final String METHOD_onCreate =        "onCreate(Bundle)";
+    public static final String METHOD_onCreate_2 =      "onCreate(Bundle,PersistableBundle)";
+    public static final String METHOD_onStart =         "onStart()";
+    public static final String METHOD_onResume =        "onResume()";
+    public static final String METHOD_onPause =         "onPause()";
+    public static final String METHOD_onStop =          "onStop()";
+    public static final String METHOD_onDestroy =       "onDestroy()";
+
+    public String className;
     public String hashCode;
     public String methodName;
     public long startTime;
@@ -21,12 +30,12 @@ public class ActivityInfo extends AbsInfo{
         super(dataTime);
     }
 
-    public String getActivityName() {
-        return activityName;
+    public String getClassName() {
+        return className;
     }
 
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getHashCode() {

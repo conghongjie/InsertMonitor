@@ -10,9 +10,13 @@ import java.util.ArrayList;
 
 public class DBInfo extends AbsInfo {
 
+
+    public static final String METHOD_getWritableDatabase = "getWritableDatabase()";
+
+
     public long startTime;
     public long endTime;
-    public String method;
+    public String methodName;
     public String stack;
     public String sql;
 
@@ -37,12 +41,12 @@ public class DBInfo extends AbsInfo {
         this.endTime = endTime;
     }
 
-    public String getMethod() {
-        return method;
+    public String getMethodName() {
+        return methodName;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
     }
 
     public String getStack() {

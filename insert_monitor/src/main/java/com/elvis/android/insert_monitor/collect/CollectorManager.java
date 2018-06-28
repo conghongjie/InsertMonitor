@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.elvis.android.insert_monitor.aidl.InsertMonitorAIDL;
 import com.elvis.android.insert_monitor.collect.aspectjx.IOCollector;
+import com.elvis.android.insert_monitor.collect.aspectjx.InflateCollector;
 import com.elvis.android.insert_monitor.collect.hack.ActivityCollector;
 import com.elvis.android.insert_monitor.collect.normal.BaseCollector;
 import com.elvis.android.insert_monitor.collect.normal.FrameCollector;
@@ -39,8 +40,9 @@ public class CollectorManager {
         };
         //采集
         IOCollector.start(aidlSender);
+        InflateCollector.start(aidlSender,context);
         ActivityCollector.start(aidlSender);
-        FrameCollector.start(aidlSender,application);
+//        FrameCollector.start(aidlSender,application);
         return true;
     }
 
@@ -58,7 +60,7 @@ public class CollectorManager {
             }
         };
         //采集
-        BaseCollector.start(iSender,context,targetPid);
+//        BaseCollector.start(iSender,context,targetPid);
         return true;
     }
 
