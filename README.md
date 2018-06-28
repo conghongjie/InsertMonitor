@@ -41,13 +41,13 @@ Insert Monitor 是针对Android线上线下性能监控的基础库，支持自�
 
 ### 实现原理：
 
-框架的基本实现原理是
+框架的基本实现原理是：AOP+Hack+普通采集
 
-有两种实现方式：
+其中AOP有两种实现方式：
 
-一、asm方式：遍历Manifest的Activity插桩（监控Activity生命周期）
+1、asm方式
 
-二、aspectjx方式：反射替换Instrument对象（监控Activity生命周期）
+2、aspectjx方式
 
 ### 接入方式：
 
