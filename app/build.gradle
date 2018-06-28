@@ -13,7 +13,8 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.sss.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -36,8 +37,10 @@ dependencies {
 
 
     //insert接入方式：
-    compile project(path: ':insert_monitor_aspectjx')
-    compile project(path: ':insert_monitor_ui')
+    compile project(':insert_monitor_aspectjx')
+    compile project(':insert_monitor_ui')
+    compile project(':insert_monitor')
+
 
 //    compile files('libs/db_detect-1.0.0.2.jar')
 }

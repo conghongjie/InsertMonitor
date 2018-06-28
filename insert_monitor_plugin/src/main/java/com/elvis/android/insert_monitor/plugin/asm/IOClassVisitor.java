@@ -1,4 +1,4 @@
-package com.elvis.android.insert_monitor.plugin.class_visitor;
+package com.elvis.android.insert_monitor.plugin.asm;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;

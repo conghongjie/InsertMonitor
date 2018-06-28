@@ -2,12 +2,9 @@ package com.elvis.android.lib.insert_monitor.demo;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.alibaba.fastjson.JSON;
 import com.elvis.android.insert_monitor.IJson;
 import com.elvis.android.insert_monitor.InsertMonitor;
-import com.elvis.android.insert_monitor.aspectjx.Animal;
-import com.elvis.android.insert_monitor.aspectjx.Test;
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
@@ -62,21 +59,9 @@ public class MainApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-
-//        InsertMonitor.init(this,base,new MyGsonJson());
-//        InsertMonitor.start();
-
-
-//        new Test().test();
-
-
-        new Animal().fly();
-
+        InsertMonitor.init(this,base,new MyGsonJson());
+        InsertMonitor.start();
     }
-
-
-
-
 
 
 }

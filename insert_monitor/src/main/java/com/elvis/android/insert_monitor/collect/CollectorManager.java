@@ -3,8 +3,10 @@ package com.elvis.android.insert_monitor.collect;
 import android.app.Application;
 import android.content.Context;
 import com.elvis.android.insert_monitor.aidl.InsertMonitorAIDL;
-import com.elvis.android.insert_monitor.collect.base.BaseCollector;
-import com.elvis.android.insert_monitor.collect.frame.FrameCollector;
+import com.elvis.android.insert_monitor.collect.aspectjx.IOCollector;
+import com.elvis.android.insert_monitor.collect.hack.ActivityCollector;
+import com.elvis.android.insert_monitor.collect.normal.BaseCollector;
+import com.elvis.android.insert_monitor.collect.normal.FrameCollector;
 import com.elvis.android.insert_monitor.data.InsertMonitorDataHandler;
 import com.elvis.android.insert_monitor.obj.AbsInfo;
 import com.elvis.android.insert_monitor.utils.ProcessUtils;
@@ -27,15 +29,18 @@ public class CollectorManager {
      * 主进程采集
      */
     public static boolean startInMainProcess(Application application, Context context){
-        //采集
+        //参数
         int targetPid = android.os.Process.myPid();
-        AbsCollector.ISender aidlSender = new AbsCollector.ISender() {
+        ISender aidlSender = new ISender() {
             @Override
             public void send(AbsInfo info, boolean isUpload) {
                 InsertMonitorAIDL.sendByAIDL(info,isUpload);
             }
         };
-        new FrameCollector(aidlSender,application).start();
+        //采集
+        IOCollector.start(aidlSender);
+        ActivityCollector.start(aidlSender);
+        FrameCollector.start(aidlSender,application);
         return true;
     }
 
@@ -44,15 +49,16 @@ public class CollectorManager {
      * 监控进程采集
      */
     public static boolean startInMonitorProcess(Application application, Context context){
-        //采集
+        //参数
         int targetPid = ProcessUtils.getMainProcessPid(context);
-        AbsCollector.ISender iSender = new AbsCollector.ISender() {
+        ISender iSender = new ISender() {
             @Override
             public void send(AbsInfo info, boolean isUpload) {
                 InsertMonitorDataHandler.handleSelfData(info,isUpload);
             }
         };
-        new BaseCollector(iSender,context,targetPid).start();
+        //采集
+        BaseCollector.start(iSender,context,targetPid);
         return true;
     }
 

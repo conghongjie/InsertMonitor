@@ -73,8 +73,9 @@ Insert Monitor 是针对Android线上线下性能监控的基础库，支持自�
     apply plugin: 'android-aspectjx'
 
     dependencies {
-        compile project(path: ':insert_monitor_aspectjx')
-        compile project(path: ':insert_monitor_ui')
+        compile project(':insert_monitor')
+        compile project(':insert_monitor_aspectjx')
+        compile project(':insert_monitor_ui')
     }
 
 ### 项目结构：

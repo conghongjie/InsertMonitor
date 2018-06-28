@@ -1,4 +1,4 @@
-package com.elvis.android.insert_monitor.collect.frame;
+package com.elvis.android.insert_monitor.collect.normal;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -10,10 +10,11 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.view.Choreographer;
 
-import com.elvis.android.insert_monitor.collect.AbsCollector;
+import com.elvis.android.insert_monitor.collect.ISender;
 import com.elvis.android.insert_monitor.obj.info.BlockInfo;
 import com.elvis.android.insert_monitor.obj.info.SMInfo;
 import com.elvis.android.insert_monitor.obj.info.StackInfo;
+import com.elvis.android.insert_monitor.utils.StackUtils;
 
 import java.util.ArrayList;
 
@@ -23,21 +24,17 @@ import java.util.ArrayList;
  */
 
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class FrameCollector extends AbsCollector {
+public class FrameCollector{
 
 
-    Application application;
+    private static ISender sender;
+    private static Application application;
 
-    public FrameCollector(ISender sender, Application application) {
-        super(sender);
-        this.application = application;
-    }
+    private static boolean isRun = false;
 
-
-    private boolean isRun = false;
-
-    @Override
-    public boolean start(){
+    public static boolean start(ISender sender, Application application){
+        FrameCollector.sender = sender;
+        FrameCollector.application = application;
         if (!isRun){
             initHandler();
             if(handler!=null) {
@@ -50,8 +47,7 @@ public class FrameCollector extends AbsCollector {
         return isRun;
     }
 
-    @Override
-    public boolean stop() {
+    public static boolean stop() {
         if(handler!=null){
             application.unregisterActivityLifecycleCallbacks(activityLifecycleCallbacks);// Activity回退栈监听器
             handler.removeCallbacks(stackCollectRunnable);// 栈采集任务
@@ -65,9 +61,9 @@ public class FrameCollector extends AbsCollector {
     /**
      * 栈采集任务（当应用处于后台时，暂停采集）
      */
-    private HandlerThread handlerThread = null;
-    private Handler handler = null;
-    private void initHandler(){
+    private static HandlerThread handlerThread = null;
+    private static Handler handler = null;
+    private static void initHandler(){
         if(handler==null){
             handlerThread = new HandlerThread("GTRChoreographerMonitorThread");
             handlerThread.start();
@@ -75,22 +71,18 @@ public class FrameCollector extends AbsCollector {
         }
     }
 
-    public int handlerThreadId = -1;
-    private Thread uiThread = Looper.getMainLooper().getThread();
-    private int interval = 30;//采集间隔--30ms
-    private Runnable stackCollectRunnable = new Runnable() {
+    private static int handlerThreadId = -1;
+    private static Thread uiThread = Looper.getMainLooper().getThread();
+    private static int interval = 30;//采集间隔--30ms
+    private static Runnable stackCollectRunnable = new Runnable() {
         @Override
         public void run() {
             if(handlerThreadId==-1){
                 handlerThreadId = android.os.Process.myTid();
             }
-            StringBuilder stackStringBuilder = new StringBuilder();
-            for (StackTraceElement stackTraceElement : uiThread.getStackTrace()) {
-                stackStringBuilder.append(stackTraceElement.toString()).append("&&rn&&");
-            }
-            long time = System.currentTimeMillis();
             //封装发送数据：
-            String stack = stackStringBuilder.toString();
+            long time = System.currentTimeMillis();
+            String stack = StackUtils.getStack(uiThread);
             StackInfo stackInfo = new StackInfo(time);
             stackInfo.time = time;
             stackInfo.stack = stack;
@@ -99,8 +91,8 @@ public class FrameCollector extends AbsCollector {
         }
     };
 
-    private ArrayList<StackInfo> stackInfos = new ArrayList<>();
-    private void onStack(StackInfo stackInfo){
+    private static ArrayList<StackInfo> stackInfos = new ArrayList<>();
+    private static void onStack(StackInfo stackInfo){
         synchronized (stackInfos){
             stackInfos.add(stackInfo);
             while (stackInfos.size()>50){
@@ -108,7 +100,7 @@ public class FrameCollector extends AbsCollector {
             }
         }
     }
-    private ArrayList<StackInfo> getStackInfos(long start,long end){
+    private static ArrayList<StackInfo> getStackInfos(long start,long end){
         ArrayList<StackInfo> temps = new ArrayList<>();
         synchronized (stackInfos){
             for (int i=0;i<stackInfos.size();i++){
@@ -126,19 +118,19 @@ public class FrameCollector extends AbsCollector {
     /**
      * Frame采集任务（当应用处于后台时，暂停采集）
      */
-    long nowSm = 0;
-    ArrayList<Long> framesInOneSecond = new ArrayList<>();//1s内所有frame的时间
+    static long nowSm = 0;
+    static ArrayList<Long> framesInOneSecond = new ArrayList<>();//1s内所有frame的时间
     //sm值：
-    final long frameCollectSection = 200;                       //采集区间:200ms
-    long lastCollectSmTime = 0;
+    static final long frameCollectSection = 200;                       //采集区间:200ms
+    static long lastCollectSmTime = 0;
     //大卡顿：
-    final long bigBlockFrameLimit = 70;                         //大卡顿：Frame间隔限制
-    long lastFrameTime = 0;
+    static final long bigBlockFrameLimit = 70;                         //大卡顿：Frame间隔限制
+    static long lastFrameTime = 0;
     //连续小卡顿：
-    final long serialBlockSMLimit = 40;                         //连续小卡顿：sm限制
-    long serialBlockStartTime = 0;
-    int serialBlockFrameNum = 0;
-    private Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {//系统绘帧回调
+    static final long serialBlockSMLimit = 40;                         //连续小卡顿：sm限制
+    static long serialBlockStartTime = 0;
+    static int serialBlockFrameNum = 0;
+    private static Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {//系统绘帧回调
         public void doFrame(long frameTimeNanos) {
             //关闭栈采集
             handler.removeCallbacks(stackCollectRunnable);
@@ -196,7 +188,7 @@ public class FrameCollector extends AbsCollector {
     /**
      * 前后台监听控制器：（当应用处于后台时，暂停采集）
      */
-    Application.ActivityLifecycleCallbacks activityLifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {
+    static Application.ActivityLifecycleCallbacks activityLifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
@@ -247,7 +239,7 @@ public class FrameCollector extends AbsCollector {
         }
     };
 
-    private Runnable stopDelayRunnable = new Runnable() {
+    private static Runnable stopDelayRunnable = new Runnable() {
         @Override
         public void run() {
             //stop

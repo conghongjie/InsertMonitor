@@ -9,7 +9,7 @@
     android:orientation="horizontal">
 
     <!--<fragment-->
-        <!--android:name="com.elvis.test.fragment.FragmentDemo2_V4"-->
+        <!--android:name="com.elvis.sss.fragment.FragmentDemo2_V4"-->
         <!--android:layout_height="325dp"-->
         <!--android:layout_width="184dp">-->
 

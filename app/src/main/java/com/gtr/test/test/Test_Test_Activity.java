@@ -19,7 +19,7 @@ public class Test_Test_Activity extends Activity {
         button_aidl.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //new TestAIDL().test(Test_Test_Activity.this);
+                //new TestAIDL().sss(Test_Test_Activity.this);
             }
         });
 

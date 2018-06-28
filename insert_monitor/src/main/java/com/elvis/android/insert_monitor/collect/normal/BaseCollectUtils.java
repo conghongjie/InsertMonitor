@@ -1,4 +1,4 @@
-package com.elvis.android.insert_monitor.collect.base;
+package com.elvis.android.insert_monitor.collect.normal;
 
 import android.app.ActivityManager;
 import android.content.Context;

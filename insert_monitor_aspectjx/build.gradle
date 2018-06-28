@@ -11,7 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.sss.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -29,7 +29,7 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:25+'
     compile 'org.aspectj:aspectjrt:1.8.9'
-    compile project(path: ':insert_monitor')
+    provided project(':insert_monitor')
 }
 
 

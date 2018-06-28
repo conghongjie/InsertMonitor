@@ -1,9 +1,10 @@
-package com.elvis.android.insert_monitor.plugin;
+package com.elvis.android.insert_monitor.plugin.asm;
 
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
 import org.objectweb.asm.commons.AdviceAdapter;
 
 //import me.wangyuwei.costtime.Cost;
@@ -13,20 +14,14 @@ import org.objectweb.asm.commons.AdviceAdapter;
  * https://github.com/JeasonWong
  */
 
-public class InsertMonitorClassVisitor extends ClassVisitor {
+public class CostClassVisitor extends ClassVisitor {
 
-  public InsertMonitorClassVisitor(ClassVisitor classVisitor) {
+  public CostClassVisitor(ClassVisitor classVisitor) {
     super(Opcodes.ASM5, classVisitor);
   }
 
   @Override
-  public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-    super.visit(version, access, name, signature, superName, interfaces);
-  }
-
-  @Override
-  public MethodVisitor visitMethod(int access, String name, String desc, String signature,
-      String[] exceptions) {
+  public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
     MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);
     mv = new AdviceAdapter(Opcodes.ASM5, mv, access, name, desc) {
 

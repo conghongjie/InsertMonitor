@@ -3,7 +3,7 @@ package com.elvis.android.insert_monitor.plugin
 import com.android.build.api.transform.*
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.internal.pipeline.TransformManager
-import com.elvis.android.insert_monitor.plugin.class_visitor.IOClassVisitor
+import com.elvis.android.insert_monitor.plugin.asm.IOClassVisitor
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.io.FileUtils
 import org.gradle.api.Plugin

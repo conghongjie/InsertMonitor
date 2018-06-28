@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    compile project(path: ':insert_monitor')
+    provided project(':insert_monitor')
 }
 
 
