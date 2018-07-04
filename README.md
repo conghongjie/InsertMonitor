@@ -39,6 +39,10 @@ Insert Monitor 是针对Android线上线下性能监控的基础库，支持自�
 
 8）线程分析
 
+9) v4Fragment监控
+
+10） 网络监控
+
 ### 实现原理：
 
 框架的基本实现原理是：AOP+Hack+普通采集

@@ -25,4 +25,10 @@ public class FragmentDemo2 extends Fragment {
 
         return view;
     }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 }

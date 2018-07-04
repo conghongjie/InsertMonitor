@@ -9,8 +9,8 @@ import com.elvis.android.insert_monitor.obj.AbsInfo;
 public class InflateInfo extends AbsInfo{
 
 
-    public static final String METHOD_inflate =             "inflate(int,ViewGroup)";
-    public static final String METHOD_setContentView =      "setContentView(int)";
+    public static final String LayoutInflater_inflate =             "inflate(int,ViewGroup)";
+    public static final String Activity_setContentView =            "setContentView(int)";
 
 
     public String methodName;

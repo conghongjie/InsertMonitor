@@ -87,7 +87,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onCreate;
+                activityInfo.methodName = ActivityInfo.Activity_onCreate;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);
@@ -105,7 +105,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onCreate_2;
+                activityInfo.methodName = ActivityInfo.Activity_onCreate_2;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);
@@ -123,7 +123,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onStart;
+                activityInfo.methodName = ActivityInfo.Activity_onStart;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);
@@ -141,7 +141,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onResume;
+                activityInfo.methodName = ActivityInfo.Activity_onResume;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);
@@ -159,7 +159,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onPause;
+                activityInfo.methodName = ActivityInfo.Activity_onPause;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);
@@ -177,7 +177,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onStop;
+                activityInfo.methodName = ActivityInfo.Activity_onStop;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);
@@ -195,7 +195,7 @@ public class ActivityCollector{
                 ActivityInfo activityInfo = new ActivityInfo(start);
                 activityInfo.className = activity==null?"":activity.getClass().getName();
                 activityInfo.hashCode = activity==null?"":(""+activity.hashCode());
-                activityInfo.methodName = ActivityInfo.METHOD_onDestroy;
+                activityInfo.methodName = ActivityInfo.Activity_onDestroy;
                 activityInfo.startTime = start;
                 activityInfo.endTime = end;
                 ActivityCollector.sendInfo(activityInfo,false);

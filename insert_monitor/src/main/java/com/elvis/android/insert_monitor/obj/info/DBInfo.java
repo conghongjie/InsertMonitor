@@ -2,7 +2,6 @@ package com.elvis.android.insert_monitor.obj.info;
 
 import com.elvis.android.insert_monitor.obj.AbsInfo;
 
-import java.util.ArrayList;
 
 /**
  * Created by conghongjie on 2018/6/21.
@@ -11,7 +10,29 @@ import java.util.ArrayList;
 public class DBInfo extends AbsInfo {
 
 
-    public static final String METHOD_getWritableDatabase = "getWritableDatabase()";
+    //SQLiteOpenHelper
+    public static final String SQLiteOpenHelper_getWritableDatabase                     = "getWritableDatabase()";
+    public static final String SQLiteOpenHelper_getReadableDatabase                     = "getReadableDatabase()";
+    //SQLiteDatabase
+    public static final String SQLiteDatabase_beginTransaction                          = "beginTransaction()";
+    public static final String SQLiteDatabase_beginTransactionNonExclusive              = "beginTransactionNonExclusive()";
+    public static final String SQLiteDatabase_beginTransactionWithListener              = "beginTransactionWithListener(SQLiteTransactionListener)";
+    public static final String SQLiteDatabase_beginTransactionWithListenerNonExclusive  = "beginTransactionWithListenerNonExclusive(SQLiteTransactionListener)";
+    public static final String SQLiteDatabase_create                                    = "create(CursorFactory)";
+    public static final String SQLiteDatabase_delete                                    = "delete(String,String,String[])";
+    public static final String SQLiteDatabase_deleteDatabase                            = "deleteDatabase(File)";
+    public static final String SQLiteDatabase_execSQL                                   = "execSQL(String)";
+    public static final String SQLiteDatabase_insert                                    = "insert(String,String,ContentValues)";
+    public static final String SQLiteDatabase_insertOrThrow                             = "insertOrThrow(String,String,ContentValues)";
+    public static final String SQLiteDatabase_insertWithOnConflict                      = "insertWithOnConflict(String,String,ContentValues,int)";
+    public static final String SQLiteDatabase_query                                     = "query(boolean,String,String[],String,String[],String,String,String,String)";
+    public static final String SQLiteDatabase_queryWithFactory                          = "queryWithFactory(CursorFactory,boolean,String,String[],String,String[],String,String,String,String,CancellationSignal)";
+    public static final String SQLiteDatabase_rawQuery                                  = "rawQuery(String,String[])";
+    public static final String SQLiteDatabase_rawQueryWithFactory                       = "rawQueryWithFactory(CursorFactory,String,String[],String,CancellationSignal)";
+    public static final String SQLiteDatabase_replace                                   = "replace(String,String,ContentValues)";
+    public static final String SQLiteDatabase_replaceOrThrow                            = "replaceOrThrow(String,String,ContentValues)";
+    public static final String SQLiteDatabase_update                                    = "update(String,ContentValues,String,String[])";
+    public static final String SQLiteDatabase_updateWithOnConflict                      = "updateWithOnConflict(String,ContentValues,String,String[],int)";
 
 
     public long startTime;

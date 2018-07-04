@@ -2,6 +2,8 @@ package com.elvis.android.insert_monitor.data;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -14,6 +16,13 @@ import java.io.OutputStreamWriter;
  */
 
 public class DataSaver {
+
+
+    public static void save(String infoString){
+        Log.e("Elvis","info:"+infoString);
+    }
+
+
 
 
 //    /**

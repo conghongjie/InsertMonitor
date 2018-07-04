@@ -19,9 +19,13 @@ import com.elvis.android.insert_monitor.utils.ProcessUtils;
 public class InsertMonitor {
 
 
+    private static boolean isOffline = false;
     private static IJson iJson;
     private static Application application;
     private static Context context;
+
+
+
 
     public static void init(Application application, Context context, IJson iJson){
         if (ProcessUtils.isMainProcess(context) || ProcessUtils.isInsertMonitorProcess(context)) {
@@ -31,7 +35,8 @@ public class InsertMonitor {
         }
     }
 
-    public static boolean start(){
+    public static boolean start(boolean isOffline){
+        InsertMonitor.isOffline = isOffline;
         //检测环境
         if (!checkMonitorEnvironmentEnable()){
             return false;
@@ -68,5 +73,9 @@ public class InsertMonitor {
 
     public static IJson getIJson() {
         return iJson;
+    }
+
+    public static boolean isOffline() {
+        return isOffline;
     }
 }

@@ -39,10 +39,10 @@ public class CollectorManager {
             }
         };
         //采集
-        IOCollector.start(aidlSender);
-        InflateCollector.start(aidlSender,context);
-        ActivityCollector.start(aidlSender);
-//        FrameCollector.start(aidlSender,application);
+//        IOCollector.start(aidlSender);
+//        InflateCollector.start(aidlSender,context);
+//        ActivityCollector.start(aidlSender);
+        FrameCollector.start(aidlSender,application);
         return true;
     }
 

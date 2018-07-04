@@ -1,4 +1,4 @@
-package com.elvis.android.insert_monitor.plugin.insert;
+package com.elvis.android.insert_monitor.collect.asm;
 
 /**
  * 主线程Handler耗时检测

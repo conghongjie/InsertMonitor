@@ -16,7 +16,8 @@ public class BlockInfo extends AbsInfo {
     public long startTime;
     public long endTime;
     public int frameNum;//卡顿期间的帧数
-    public ArrayList<StackInfo> stackInfos;
+    public ArrayList<MessageInfo> messageInfos = new ArrayList<>();
+    public ArrayList<StackInfo> stackInfos = new ArrayList<>();
 
     public BlockInfo(long dataTime) {
         super(dataTime);
@@ -53,5 +54,13 @@ public class BlockInfo extends AbsInfo {
 
     public void setStackInfos(ArrayList<StackInfo> stackInfos) {
         this.stackInfos = stackInfos;
+    }
+
+    public ArrayList<MessageInfo> getMessageInfos() {
+        return messageInfos;
+    }
+
+    public void setMessageInfos(ArrayList<MessageInfo> messageInfos) {
+        this.messageInfos = messageInfos;
     }
 }

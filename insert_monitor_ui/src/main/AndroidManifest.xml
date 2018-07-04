@@ -5,6 +5,19 @@
     <application android:allowBackup="true" android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <activity android:name=".activity.MonitorActivity"
+            android:label="Monitor"
+            android:launchMode="singleTask"
+            android:process=":insert_monitor"
+            android:taskAffinity="${applicationId}.insert_monitor"
+            android:icon="@drawable/icon_monitor" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>

@@ -12,8 +12,8 @@ import org.json.JSONObject;
 public abstract class AbsInfo {
 
 
-    String dataType;
-    long dataTime;
+    public String dataType;
+    public long dataTime;
 
     public AbsInfo(long dataTime){
         this.dataType = this.getClass().getSimpleName();

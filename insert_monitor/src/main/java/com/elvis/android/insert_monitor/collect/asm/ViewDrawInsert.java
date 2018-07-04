@@ -1,4 +1,4 @@
-package com.elvis.android.insert_monitor.plugin.insert;
+package com.elvis.android.insert_monitor.collect.asm;
 
 /**
  * View绘制耗时监控

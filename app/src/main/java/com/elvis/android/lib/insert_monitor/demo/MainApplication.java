@@ -2,6 +2,9 @@ package com.elvis.android.lib.insert_monitor.demo;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
+import android.util.Printer;
+
 import com.alibaba.fastjson.JSON;
 import com.elvis.android.insert_monitor.IJson;
 import com.elvis.android.insert_monitor.InsertMonitor;
@@ -13,6 +16,21 @@ import com.google.gson.JsonParser;
  */
 
 public class MainApplication extends Application {
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        InsertMonitor.init(this,base,new MyGsonJson());
+        InsertMonitor.start(true);
+
+    }
+
+
+
+
+
+
 
 
 
@@ -53,14 +71,6 @@ public class MainApplication extends Application {
         public String toJson(Object object) {
             return JSON.toJSONString(object);
         }
-    }
-
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        InsertMonitor.init(this,base,new MyGsonJson());
-        InsertMonitor.start();
     }
 
 

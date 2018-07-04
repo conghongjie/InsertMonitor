@@ -12,13 +12,13 @@ public class ActivityInfo extends AbsInfo{
 
 
 
-    public static final String METHOD_onCreate =        "onCreate(Bundle)";
-    public static final String METHOD_onCreate_2 =      "onCreate(Bundle,PersistableBundle)";
-    public static final String METHOD_onStart =         "onStart()";
-    public static final String METHOD_onResume =        "onResume()";
-    public static final String METHOD_onPause =         "onPause()";
-    public static final String METHOD_onStop =          "onStop()";
-    public static final String METHOD_onDestroy =       "onDestroy()";
+    public static final String Activity_onCreate =        "onCreate(Bundle)";
+    public static final String Activity_onCreate_2 =      "onCreate(Bundle,PersistableBundle)";
+    public static final String Activity_onStart =         "onStart()";
+    public static final String Activity_onResume =        "onResume()";
+    public static final String Activity_onPause =         "onPause()";
+    public static final String Activity_onStop =          "onStop()";
+    public static final String Activity_onDestroy =       "onDestroy()";
 
     public String className;
     public String hashCode;

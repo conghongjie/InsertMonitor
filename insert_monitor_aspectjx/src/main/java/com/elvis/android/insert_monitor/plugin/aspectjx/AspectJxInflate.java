@@ -19,7 +19,7 @@ import org.aspectj.lang.annotation.Aspect;
 public class AspectJxInflate {
 
     @Around("call(void android.app.Activity.setContentView(int))")
-    public void onActivitySetContentView(ProceedingJoinPoint joinPoint) throws Throwable {
+    public void Activity_setContentView(ProceedingJoinPoint joinPoint) throws Throwable {
         if (InflateCollector.isStart()){
             long start = System.currentTimeMillis();
             joinPoint.proceed();
@@ -33,7 +33,7 @@ public class AspectJxInflate {
                 }catch (Exception e){
                 }
                 InflateInfo inflateInfo = new InflateInfo(start);
-                inflateInfo.methodName = InflateInfo.METHOD_setContentView;
+                inflateInfo.methodName = InflateInfo.Activity_setContentView;
                 inflateInfo.resource = resource;
                 inflateInfo.stack = StackUtils.getStack(Thread.currentThread());
                 inflateInfo.startTime = start;
@@ -48,7 +48,7 @@ public class AspectJxInflate {
 
 
     @Around("call(android.view.View android.view.LayoutInflater.inflate(int,android.view.ViewGroup))")
-    public View onLayoutInflaterInflate(ProceedingJoinPoint joinPoint) throws Throwable {
+    public View LayoutInflater_inflate(ProceedingJoinPoint joinPoint) throws Throwable {
         View result;
         if (InflateCollector.isStart()){
             long start = System.currentTimeMillis();
@@ -63,7 +63,7 @@ public class AspectJxInflate {
                 }catch (Exception e){
                 }
                 InflateInfo inflateInfo = new InflateInfo(start);
-                inflateInfo.methodName = InflateInfo.METHOD_inflate;
+                inflateInfo.methodName = InflateInfo.LayoutInflater_inflate;
                 inflateInfo.resource = resource;
                 inflateInfo.stack = StackUtils.getStack(Thread.currentThread());
                 inflateInfo.startTime = start;
