@@ -24,9 +24,6 @@ public class InsertMonitor {
     private static Application application;
     private static Context context;
 
-
-
-
     public static void init(Application application, Context context, IJson iJson){
         if (ProcessUtils.isMainProcess(context) || ProcessUtils.isInsertMonitorProcess(context)) {
             InsertMonitor.application = application;
@@ -37,30 +34,10 @@ public class InsertMonitor {
 
     public static boolean start(boolean isOffline){
         InsertMonitor.isOffline = isOffline;
-        //检测环境
-        if (!checkMonitorEnvironmentEnable()){
-            return false;
-        }
-        //采集
-        if (ProcessUtils.isMainProcess(context)){
-            //启动Monitor进程
-            InsertMonitorAIDL.startMonitorProcess(context);
-            CollectorManager.startInMainProcess(application,context);
-            return true;
-        }else if (ProcessUtils.isInsertMonitorProcess(context)){
-            CollectorManager.startInMonitorProcess(application,context);
-            return true;
-        }
-        return false;
+        return CollectorManager.startInMainProcess(application,context);
     }
 
-    private static boolean checkMonitorEnvironmentEnable(){
-        int sdkInt = Build.VERSION.SDK_INT;
-        if (sdkInt<16){//FrameCollector要求16版本以上
-            return false;
-        }
-        return true;
-    }
+
 
 
     public static Context getContext() {

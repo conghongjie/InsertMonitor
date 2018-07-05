@@ -7,8 +7,12 @@ import com.elvis.android.insert_monitor.obj.AbsInfo;
  * Created by conghongjie on 2018/6/24.
  */
 
-public interface InsertMonitorUI {
+public interface IUIAnalysis {
 
-    void onData(AbsInfo info);
+    void setInstance();
+
+    void onData(String info);
+
+    void clearData();
 
 }

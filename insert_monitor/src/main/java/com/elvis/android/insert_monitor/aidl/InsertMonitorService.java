@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.elvis.android.insert_monitor.collect.CollectorManager;
 import com.elvis.android.insert_monitor.data.InsertMonitorDataHandler;
 
 /**
@@ -23,6 +24,8 @@ public class InsertMonitorService extends Service{
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.e("ElvisKK_2","====:");
+        CollectorManager.startInMonitorProcess(getApplication(),getApplicationContext());
         return new AIDLDataReceiver();
     }
 

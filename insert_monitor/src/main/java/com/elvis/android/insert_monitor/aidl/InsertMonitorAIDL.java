@@ -43,7 +43,6 @@ public class InsertMonitorAIDL {
         Intent intent = new Intent();
         intent.setPackage(context.getPackageName());
         intent.setAction("com.elvis.android.InsertMonitorService");
-        context.startService(intent);
         context.bindService(intent, conn, Context.BIND_AUTO_CREATE);
     }
 

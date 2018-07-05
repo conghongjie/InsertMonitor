@@ -1,5 +1,7 @@
 package com.elvis.android.insert_monitor.analysis;
 
+import com.elvis.android.insert_monitor.obj.AbsInfo;
+
 /**
  *
  *
@@ -8,10 +10,11 @@ package com.elvis.android.insert_monitor.analysis;
 
 public class InsertMonitorAnalysis {
 
+    public void onData(AbsInfo info) {
 
+    }
 
+    public void clearData() {
 
-
-
-
+    }
 }

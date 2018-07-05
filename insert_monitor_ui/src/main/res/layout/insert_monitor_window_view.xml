@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/insert_monitor_window_item_bg">
+
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:padding="3dp"
+        android:background="#333333"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:textColor="#ffffff"
+        android:ellipsize="end"
+        android:text="@string/app_name"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:background="@drawable/insert_monitor_window_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="SM:"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txt_value_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text=""/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:background="@drawable/insert_monitor_window_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="卡顿："/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txt_value_block"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text=""/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:background="@drawable/insert_monitor_window_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="CPU:"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txt_value_cpu"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text=""/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:background="@drawable/insert_monitor_window_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="内存："/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txt_value_memory"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text=""/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:background="@drawable/insert_monitor_window_item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text="其他告警："/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/txt_value_warnings"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:padding="3dp"
+            android:layout_gravity="center"
+            android:textSize="12sp"
+            android:textColor="#ffffff"
+            android:text=""/>
+    </LinearLayout>
+
+</LinearLayout>

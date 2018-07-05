@@ -7,18 +7,18 @@ import com.elvis.android.insert_monitor.obj.AbsInfo;
  * Created by conghongjie on 2018/6/24.
  */
 
-public class InsertMonitorUIWrapper implements InsertMonitorUI{
+public class UIAnalysisWrapper implements IUIAnalysis {
 
 
     /**
      * 单例模式
      */
-    static InsertMonitorUIWrapper instance;
-    public static InsertMonitorUIWrapper getInstance() {
+    static UIAnalysisWrapper instance;
+    public static UIAnalysisWrapper getInstance() {
         if (instance==null){
-            synchronized (InsertMonitorUIWrapper.class){
+            synchronized (UIAnalysisWrapper.class){
                 if (instance==null){
-                    instance = new InsertMonitorUIWrapper();
+                    instance = new UIAnalysisWrapper();
                 }
             }
         }
@@ -28,18 +28,19 @@ public class InsertMonitorUIWrapper implements InsertMonitorUI{
     /**
      * 反射初始化
      */
-    private static final String ADAPTER_CLASS = "com.elvis.android.insert_monitor.ui.InsertMonitorUIImpl";
-    private InsertMonitorUI impl;
+    private static final String ADAPTER_CLASS = "com.elvis.android.insert_monitor.ui.UIAnalysisImpl";
+    private IUIAnalysis impl;
     private boolean isTryLoad = false;
     private void tryLoad(){
         if (!isTryLoad){
-            synchronized (InsertMonitorUIWrapper.class){
+            synchronized (UIAnalysisWrapper.class){
                 if (!isTryLoad){
                     try {
                         Class<?> clz = Class.forName(ADAPTER_CLASS);
                         Object o = clz.newInstance();
-                        if (o instanceof InsertMonitorUI) {
-                            impl = (InsertMonitorUI) o;
+                        if (o instanceof IUIAnalysis) {
+                            impl = (IUIAnalysis) o;
+                            impl.setInstance();
                         }
                     } catch (Throwable tr) {
                         tr.printStackTrace();
@@ -55,16 +56,30 @@ public class InsertMonitorUIWrapper implements InsertMonitorUI{
     }
 
 
+
+
     /**
      * 包装实现接口
      */
-    public void onData(AbsInfo info){
+
+    @Override
+    public void setInstance() {
+        // do nothing
+    }
+
+    @Override
+    public void onData(String info){
         tryLoad();
         if (impl!=null){
             impl.onData(info);
         }
     }
 
-
-
+    @Override
+    public void clearData() {
+        tryLoad();
+        if (impl!=null){
+            impl.clearData();
+        }
+    }
 }

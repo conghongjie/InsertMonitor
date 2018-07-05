@@ -5,6 +5,7 @@
     android:fillViewport="true"
     android:fadingEdge="none"
     android:overScrollMode="never"
+    android:background="#000000"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -16,13 +17,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_margin="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="InsertMonitor-app"/>
+                android:layout_marginLeft="5dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#bbbbbb"
+                android:text="@string/app_name"/>
 
             <View
                 android:layout_width="0dp"
@@ -33,19 +39,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#bbbbbb"
                 android:text="悬浮窗"/>
 
             <com.elvis.android.insert_monitor.ui.view.SwitchButton
-                android:id="@+id/switch_button"
+                android:id="@+id/window_switch"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"/>
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#aaaaaa"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:textColor="#bbbbbb"
             android:text="实时："/>
 
         <LinearLayout
@@ -56,24 +74,26 @@
             <include
                 android:id="@+id/item_sm"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
             <include
                 android:id="@+id/item_cpu"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
             <include
+                android:id="@+id/item_memory"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
             <include
+                android:id="@+id/item_flow"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
 
         </LinearLayout>
@@ -81,7 +101,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="问题："/>
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="14sp"
+            android:textColor="#bbbbbb"
+            android:text="告警："/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,71 +113,28 @@
             android:orientation="vertical">
 
             <include
-                android:id="@+id/item_sm"
+                android:id="@+id/item_block"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
             <include
-                android:id="@+id/item_cpu"
+                android:id="@+id/item_activity"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
             <include
+                android:id="@+id/item_db"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
             <include
+                android:id="@+id/item_view_build"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                layout="@layout/item_monitor" />
+                android:layout_height="wrap_content"
+                layout="@layout/insert_monitor_item" />
 
         </LinearLayout>
 

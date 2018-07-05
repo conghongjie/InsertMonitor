@@ -17,7 +17,7 @@ public class Test_ViewBuild_Activity extends Activity {
         setContentView(R.layout.activity_test_viewbuild);
 
         LayoutInflater inflater = getLayoutInflater();
-        View v = inflater.inflate(R.layout.activity_monitor,null);
+        View v = inflater.inflate(R.layout.insert_monitor_activity_main,null);
 
     }
 }
