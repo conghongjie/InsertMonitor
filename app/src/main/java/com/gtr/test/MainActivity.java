@@ -26,26 +26,6 @@ public class MainActivity extends Activity {
 
 
 
-
-
-
-
-//        Intent i = new Intent("miui.intent.action.APP_PERM_EDITOR");
-//        ComponentName componentName = new ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity");
-//        i.setComponent(componentName);
-//        i.putExtra("extra_pkgname", getPackageName());
-//        try {
-//            showBlockList(i);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-
-
-
-
-
         AsyncTask asyncTask = new AsyncTask() {
             LinearLayout linearLayout;
             @Override

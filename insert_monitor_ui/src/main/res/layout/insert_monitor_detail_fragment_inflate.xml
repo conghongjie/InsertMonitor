@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:overScrollMode="never">
         <ListView
-            android:id="@+id/list_block"
+            android:id="@+id/list_db"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:divider="@drawable/insert_monitor_detail_fragment_block_list_divider"
             android:dividerHeight="0.5dp"
             android:overScrollMode="never"/>
     </HorizontalScrollView>
+
 </LinearLayout>

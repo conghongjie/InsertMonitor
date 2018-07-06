@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.elvis.android.insert_monitor.ui.R;
 import com.elvis.android.insert_monitor.ui.fragment.detail.BlockFragment;
+import com.elvis.android.insert_monitor.ui.fragment.detail.DBFragment;
+import com.elvis.android.insert_monitor.ui.fragment.detail.InflateFragment;
 
 /**
  * Created by conghongjie on 2018/7/4.
@@ -29,7 +31,8 @@ public class DetailActivity extends Activity{
     FragmentManager fm = getFragmentManager();
     public static final String KEY_DETAIL = "detail_type";
     public static final int DETAIL_BLOCK = 1;
-    public static final int DETAIL_INFLATE = 2;
+    public static final int DETAIL_DB = 2;
+    public static final int DETAIL_INFLATE = 3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +58,13 @@ public class DetailActivity extends Activity{
                     txt_title.setText("卡顿检测");
                     replaceFragment(new BlockFragment());
                     break;
+                case DETAIL_DB:
+                    txt_title.setText("DB检测");
+                    replaceFragment(new DBFragment());
+                    break;
                 case DETAIL_INFLATE:
+                    txt_title.setText("View检测");
+                    replaceFragment(new InflateFragment());
                     break;
                 default:
                     finish();

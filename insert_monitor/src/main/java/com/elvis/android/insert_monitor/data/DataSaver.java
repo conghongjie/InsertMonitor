@@ -19,7 +19,7 @@ public class DataSaver {
 
 
     public static void save(String infoString){
-        Log.e("Elvis","info:"+infoString);
+//        Log.e("Elvis","info:"+infoString);
     }
 
 

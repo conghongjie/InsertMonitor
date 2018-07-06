@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.util.Log;
 import android.util.Printer;
 import android.view.Choreographer;
 
@@ -159,7 +158,7 @@ public class FrameCollector{
     private static Handler handler = null;
     private static void initHandler(){
         if(handler==null){
-            handlerThread = new HandlerThread("GTRChoreographerMonitorThread");
+            handlerThread = new HandlerThread("MonitorFrameThread");
             handlerThread.start();
             handler = new Handler(handlerThread.getLooper());
         }
@@ -256,8 +255,8 @@ public class FrameCollector{
         @Override
         public void onActivityResumed(Activity activity) {
             if (isRun){
-                if(handler!=null){
-                    handler.removeCallbacks(stopDelayRunnable);
+                if(mainHandler!=null){
+                    mainHandler.removeCallbacks(stopDelayRunnable);
                     //stop
                     stopFrame();
                     //start
@@ -269,8 +268,8 @@ public class FrameCollector{
         @Override
         public void onActivityPaused(Activity activity) {
             if (isRun){
-                if(handler!=null){
-                    handler.postDelayed(stopDelayRunnable,1500);
+                if(mainHandler!=null){
+                    mainHandler.postDelayed(stopDelayRunnable,1500);
                 }
             }
         }
@@ -291,6 +290,8 @@ public class FrameCollector{
         }
     };
 
+
+    static Handler mainHandler = new Handler(Looper.getMainLooper());
     private static Runnable stopDelayRunnable = new Runnable() {
         @Override
         public void run() {

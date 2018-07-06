@@ -1,6 +1,8 @@
 package com.elvis.android.insert_monitor.ui.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +13,7 @@ import com.elvis.android.insert_monitor.ui.R;
 import com.elvis.android.insert_monitor.ui.UIAnalysisImpl;
 import com.elvis.android.insert_monitor.ui.view.SwitchButton;
 import com.elvis.android.insert_monitor.ui.windows.MonitorWindow;
+import com.elvis.android.insert_monitor.utils.WindowPermissionUtils;
 
 /**
  * Created by conghongjie on 2018/7/3.
@@ -60,10 +63,14 @@ public class MonitorActivity extends Activity{
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
                 if (isChecked && !MonitorWindow.isShow){
+                    if (!WindowPermissionUtils.checkFloatWindowPermission(MonitorActivity.this)){
+                        showFloatWindowPermissionDialog();
+                    }
                     MonitorWindow.show(MonitorActivity.this);
                 }else if (!isChecked && MonitorWindow.isShow){
                     MonitorWindow.hide();
                 }
+
             }
         });
         smItem = buildItemView(R.id.item_sm);
@@ -96,6 +103,7 @@ public class MonitorActivity extends Activity{
                 lastCheckDBNum= UIAnalysisImpl.getDBInfos().size();
                 dbItem.tip.setVisibility(View.GONE);
                 dbItem.tip.setText("");
+                DetailActivity.startDetailActivty(MonitorActivity.this,DetailActivity.DETAIL_DB);
             }
         });
         inflateItem = buildItemView(R.id.item_view_build);
@@ -133,6 +141,27 @@ public class MonitorActivity extends Activity{
         if (inflate_tip>0){
             inflateItem.tip.setText(inflate_tip+"");
         }
+    }
+
+
+
+    private void showFloatWindowPermissionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MonitorActivity.this);
+        builder.setTitle("权限申请：")
+                .setMessage("请开启悬浮窗权限！")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        WindowPermissionUtils.goSettingActivity(MonitorActivity.this);
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 
     /**

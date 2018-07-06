@@ -41,7 +41,6 @@ public class BaseCollectUtils {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return cpuTotal;
     }
@@ -62,7 +61,6 @@ public class BaseCollectUtils {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return cpuApp;
     }

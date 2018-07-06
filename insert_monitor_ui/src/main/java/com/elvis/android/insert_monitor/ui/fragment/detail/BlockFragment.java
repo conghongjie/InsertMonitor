@@ -3,6 +3,7 @@ package com.elvis.android.insert_monitor.ui.fragment.detail;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.elvis.android.insert_monitor.obj.info.BlockInfo;
+import com.elvis.android.insert_monitor.obj.info.StackInfo;
 import com.elvis.android.insert_monitor.ui.R;
 import com.elvis.android.insert_monitor.ui.UIAnalysisImpl;
+import com.elvis.android.insert_monitor.ui.activity.StackSeeActivity;
 import com.elvis.android.insert_monitor.ui.view.m_text_view.MTextView;
 import com.elvis.android.insert_monitor.utils.StackUtils;
 import com.elvis.android.insert_monitor.utils.TimeUtils;
@@ -65,18 +68,25 @@ public class BlockFragment extends Fragment{
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View blockItem = mInflater.inflate(R.layout.insert_monitor_detail_fragment_block_item_block, null);
-            BlockInfo blockInfo = (BlockInfo) getItem(position);
+            View blockItem = mInflater.inflate(R.layout.insert_monitor_detail_fragment_block_item, null);
+            final BlockInfo blockInfo = (BlockInfo) getItem(position);
             if (blockInfo!=null){
-                TextView txt_item_block_take = (TextView) blockItem.findViewById(R.id.txt_item_block_take);
                 TextView txt_item_block_time = (TextView) blockItem.findViewById(R.id.txt_item_block_time);
+                TextView txt_item_block_take = (TextView) blockItem.findViewById(R.id.txt_item_block_take);
                 MTextView txt_item_block_stack = (MTextView) blockItem.findViewById(R.id.txt_item_block_stack);
-                txt_item_block_take.setText(""+(blockInfo.endTime-blockInfo.startTime)+"ms");
                 txt_item_block_time.setText(TimeUtils.formatToSecond(blockInfo.startTime-UIAnalysisImpl.getFirstDataTime()));
-                txt_item_block_stack.setMText(StackUtils.getEffectiveCode(blockInfo.stackInfos));
+                txt_item_block_take.setText(""+(blockInfo.endTime-blockInfo.startTime)+"ms");
+                txt_item_block_stack.setMText("定位："+StackUtils.getBlockCode(blockInfo.stackInfos));
                 txt_item_block_stack.setTextSize(14);
                 txt_item_block_stack.setTextColor(Color.parseColor("#bbbbbb"));
             }
+
+            blockItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StackSeeActivity.startStackSeeActivity(getActivity(),blockInfo.stackInfos);
+                }
+            });
             return blockItem;
         }
     };

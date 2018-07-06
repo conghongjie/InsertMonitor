@@ -54,7 +54,7 @@ public class BaseCollector{
     private static Handler handler = null;
     private static void initHandler(){
         if(handler==null){
-            handlerThread = new HandlerThread("GTRNormalMonitorThread");
+            handlerThread = new HandlerThread("MonitorBaseThread");
             handlerThread.start();
             handler = new Handler(handlerThread.getLooper());
         }

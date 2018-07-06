@@ -14,8 +14,20 @@ public class StackUtils {
 
     public static String getStack(Thread thread){
         StringBuilder stackStringBuilder = new StringBuilder();
+        boolean isStart = false;
         for (StackTraceElement stackTraceElement : thread.getStackTrace()) {
-            stackStringBuilder.append(stackTraceElement.toString()).append("\n");
+            String code = stackTraceElement.toString();
+            if (!isStart){
+                if (!code.startsWith("dalvik.system.VMStack.getThreadStackTrace")
+                        &&!code.startsWith("java.lang.Thread.getStackTrace")
+                        &&!code.startsWith("com.elvis.android.insert_monitor")){
+                    stackStringBuilder.append(stackTraceElement.toString()).append("\n");
+                    isStart = true;
+                }
+            }else {
+                stackStringBuilder.append(stackTraceElement.toString()).append("\n");
+            }
+
         }
         return stackStringBuilder.toString();
     }
@@ -23,10 +35,10 @@ public class StackUtils {
 
 
 
-    public static String getEffectiveCode(ArrayList<StackInfo> stackInfos){
+    public static String getBlockCode(ArrayList<StackInfo> stackInfos){
         HashMap<String,Integer> effectiveCodeTimes = new HashMap<>();
         for (int i = 0;i<stackInfos.size();i++){
-            String effectiveCode = getEffectiveCode(stackInfos.get(i));
+            String effectiveCode = getBlockCode(stackInfos.get(i));
             Integer time = effectiveCodeTimes.get(effectiveCode);
             effectiveCodeTimes.put(effectiveCode,time==null?1:(time+1));
         }
@@ -44,7 +56,7 @@ public class StackUtils {
         return mostEffectiveCode;
     }
 
-    private static String getEffectiveCode(StackInfo stackInfo){
+    private static String getBlockCode(StackInfo stackInfo){
         String[] stacks = stackInfo.stack.split("\n");
         for (int i = stacks.length-1;i>=0;i--){
             String code = stacks[i];
@@ -61,7 +73,21 @@ public class StackUtils {
     }
 
 
+    public static String getDBCode(String stack){
+        String[] stacks = stack.split("\n");
+        if (stacks.length>0){
+            return stacks[0];
+        }
+        return "";
+    }
 
+    public static String getInflateCode(String stack){
+        String[] stacks = stack.split("\n");
+        if (stacks.length>0){
+            return stacks[0];
+        }
+        return "";
+    }
 
 
 }

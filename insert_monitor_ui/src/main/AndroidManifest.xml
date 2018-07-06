@@ -19,7 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activity.DetailActivity"
+            android:process=":insert_monitor"
+            android:taskAffinity="${applicationId}.insert_monitor"/>
+
+        <activity android:name=".activity.StackSeeActivity"
             android:process=":insert_monitor"
             android:taskAffinity="${applicationId}.insert_monitor"/>
 

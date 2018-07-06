@@ -39,7 +39,7 @@ public class InsertMonitorDataHandler {
         if(handler==null){
             synchronized (InsertMonitorDataHandler.class){
                 if(handler==null) {
-                    handlerThread = new HandlerThread("InsertMonitorDataHandler");
+                    handlerThread = new HandlerThread("MonitorHandlerThread");
                     handlerThread.start();
                     handler = new Handler(handlerThread.getLooper());
                 }
