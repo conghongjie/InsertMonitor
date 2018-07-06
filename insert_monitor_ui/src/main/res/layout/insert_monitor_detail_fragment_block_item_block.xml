@@ -1,0 +1,65 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#000000"
+        android:padding="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#bbbbbb"
+                android:text="耗时："/>
+            <TextView
+                android:id="@+id/txt_item_block_take"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#cc0000"
+                android:text=""/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/txt_item_block_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#bbbbbb"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.elvis.android.insert_monitor.ui.view.m_text_view.MTextView
+                android:id="@+id/txt_item_block_stack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:textColor="#bbbbbb"
+                android:text=""/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -83,6 +83,7 @@ public class MonitorActivity extends Activity{
                 lastCheckBlockNum = UIAnalysisImpl.getBlockInfos().size();
                 blockItem.tip.setVisibility(View.GONE);
                 blockItem.tip.setText("");
+                DetailActivity.startDetailActivty(MonitorActivity.this,DetailActivity.DETAIL_BLOCK);
             }
         });
         activityItem = buildItemView(R.id.item_activity);
@@ -105,6 +106,7 @@ public class MonitorActivity extends Activity{
                 lastCheckInflateNum = UIAnalysisImpl.getInflateInfos().size();
                 inflateItem.tip.setVisibility(View.GONE);
                 inflateItem.tip.setText("");
+                DetailActivity.startDetailActivty(MonitorActivity.this,DetailActivity.DETAIL_INFLATE);
             }
         });
 
