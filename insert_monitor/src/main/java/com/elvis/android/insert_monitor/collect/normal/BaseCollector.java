@@ -16,7 +16,7 @@ import com.elvis.android.insert_monitor.obj.info.BaseInfo;
 public class BaseCollector{
 
 
-    private static final int COLLECT_INTERVAL = 3000;
+    private static final int COLLECT_INTERVAL = 1000;
 
     private static ISender sender;
     private static Context context;

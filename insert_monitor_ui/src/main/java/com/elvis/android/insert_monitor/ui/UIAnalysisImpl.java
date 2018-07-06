@@ -26,64 +26,74 @@ public class UIAnalysisImpl implements IUIAnalysis {
     public static IUIAnalysis instance;
 
     @Override
-    public void setInstance() {
+    public void setNowAnalysis() {
         instance = this;
-    }
-
-    /**
-     * callback
-     */
-
-    public interface UICallBack{
-        void onSMChange();
-        void onBaseChange();
-        void onBlockChange();
-        void onActivityChange();
-        void onDBChange();
-        void onInflateChange();
-    }
-    private static ArrayList<UICallBack> callBacks = new ArrayList<>();
-    public static void addCallBack(UICallBack callBack){
-        callBacks.add(callBack);
-    }
-    public static void removeCallBack(UICallBack callBack){
-        callBacks.add(callBack);
-    }
-    private static void callSMChange(){
-        for (int i=0;i<callBacks.size();i++){
-            callBacks.get(i).onSMChange();
-        }
-    }
-    private static void callBaseChange(){
-        for (int i=0;i<callBacks.size();i++){
-            callBacks.get(i).onBaseChange();
-        }
-    }
-    private static void callBlockChange(){
-        for (int i=0;i<callBacks.size();i++){
-            callBacks.get(i).onBlockChange();
-        }
-    }
-    private static void callActivityChange(){
-        for (int i=0;i<callBacks.size();i++){
-            callBacks.get(i).onActivityChange();
-        }
-    }
-    private static void callDBChange(){
-        for (int i=0;i<callBacks.size();i++){
-            callBacks.get(i).onDBChange();
-        }
-    }
-    private static void callViewBuildChange(){
-        for (int i=0;i<callBacks.size();i++){
-            callBacks.get(i).onInflateChange();
-        }
+        //clear
+        isFirstData = true;
+        smInfos.clear();
+        baseInfos.clear();
+        blockInfos.clear();
+        dbInfos.clear();
+        inflateInfos.clear();
     }
 
 
     /**
      * Data
      */
+    private static boolean isFirstData = true;
+    private static long firstDataTime = System.currentTimeMillis();
+
+    public static long getFirstDataTime() {
+        return firstDataTime;
+    }
+
+    @Override
+    public void onData(String info) {
+        try {
+            JSONObject jsonObject = new JSONObject(info);
+            String dataType = jsonObject.getString("dataType");
+            if (isFirstData){
+                firstDataTime = jsonObject.optLong("dataTime",System.currentTimeMillis());
+                isFirstData = false;
+            }
+            switch (dataType){
+                case "ActivityInfo":
+                    ActivityInfo activityInfo = InsertMonitor.getIJson().fromJson(info,ActivityInfo.class);
+                    break;
+                case "BaseInfo":
+                    BaseInfo baseInfo = InsertMonitor.getIJson().fromJson(info,BaseInfo.class);
+                    addBaseInfo(baseInfo);
+                    callBaseChange();
+                    break;
+                case "BlockInfo":
+                    BlockInfo blockInfo = InsertMonitor.getIJson().fromJson(info,BlockInfo.class);
+                    addBlockInfo(blockInfo);
+                    callBlockChange();
+                    break;
+                case "DBInfo":
+                    DBInfo dbInfo = InsertMonitor.getIJson().fromJson(info,DBInfo.class);
+                    addDBInfo(dbInfo);
+                    callDBChange();
+                    break;
+                case "InflateInfo":
+                    InflateInfo inflateInfo = InsertMonitor.getIJson().fromJson(info,InflateInfo.class);
+                    addInflateInfo(inflateInfo);
+                    callViewBuildChange();
+                    break;
+                case "SMInfo":
+                    SMInfo smInfo = InsertMonitor.getIJson().fromJson(info,SMInfo.class);
+                    addSMInfo(smInfo);
+                    callSMChange();
+                    break;
+                default:
+                    throw new Exception("未知类型数据："+(info==null?"null":info));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<SMInfo> smInfos = new ArrayList<>();
     private static void addSMInfo(SMInfo smInfo){
         smInfos.add(smInfo);
@@ -180,60 +190,59 @@ public class UIAnalysisImpl implements IUIAnalysis {
 
 
 
+    /**
+     * callback
+     */
 
-
-
-
-
-    @Override
-    public void onData(String info) {
-        try {
-            JSONObject jsonObject = new JSONObject(info);
-            String dataType = jsonObject.getString("dataType");
-            switch (dataType){
-                case "ActivityInfo":
-                    ActivityInfo activityInfo = InsertMonitor.getIJson().fromJson(info,ActivityInfo.class);
-                    break;
-                case "BaseInfo":
-                    BaseInfo baseInfo = InsertMonitor.getIJson().fromJson(info,BaseInfo.class);
-                    addBaseInfo(baseInfo);
-                    callBaseChange();
-                    break;
-                case "BlockInfo":
-                    BlockInfo blockInfo = InsertMonitor.getIJson().fromJson(info,BlockInfo.class);
-                    addBlockInfo(blockInfo);
-                    callBlockChange();
-                    break;
-                case "DBInfo":
-                    DBInfo dbInfo = InsertMonitor.getIJson().fromJson(info,DBInfo.class);
-                    addDBInfo(dbInfo);
-                    callDBChange();
-                    break;
-                case "InflateInfo":
-                    InflateInfo inflateInfo = InsertMonitor.getIJson().fromJson(info,InflateInfo.class);
-                    addInflateInfo(inflateInfo);
-                    callViewBuildChange();
-                    break;
-                case "SMInfo":
-                    SMInfo smInfo = InsertMonitor.getIJson().fromJson(info,SMInfo.class);
-                    addSMInfo(smInfo);
-                    callSMChange();
-                    break;
-                default:
-                    throw new Exception("未知类型数据："+(info==null?"null":info));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public interface UICallBack{
+        void onSMChange();
+        void onBaseChange();
+        void onBlockChange();
+        void onActivityChange();
+        void onDBChange();
+        void onInflateChange();
+    }
+    private static ArrayList<UICallBack> callBacks = new ArrayList<>();
+    public static void addCallBack(UICallBack callBack){
+        callBacks.add(callBack);
+    }
+    public static void removeCallBack(UICallBack callBack){
+        callBacks.add(callBack);
+    }
+    private static void callSMChange(){
+        for (int i=0;i<callBacks.size();i++){
+            callBacks.get(i).onSMChange();
+        }
+    }
+    private static void callBaseChange(){
+        for (int i=0;i<callBacks.size();i++){
+            callBacks.get(i).onBaseChange();
+        }
+    }
+    private static void callBlockChange(){
+        for (int i=0;i<callBacks.size();i++){
+            callBacks.get(i).onBlockChange();
+        }
+    }
+    private static void callActivityChange(){
+        for (int i=0;i<callBacks.size();i++){
+            callBacks.get(i).onActivityChange();
+        }
+    }
+    private static void callDBChange(){
+        for (int i=0;i<callBacks.size();i++){
+            callBacks.get(i).onDBChange();
+        }
+    }
+    private static void callViewBuildChange(){
+        for (int i=0;i<callBacks.size();i++){
+            callBacks.get(i).onInflateChange();
         }
     }
 
-    @Override
-    public void clearData() {
-        smInfos.clear();
-        baseInfos.clear();
-        blockInfos.clear();
-        dbInfos.clear();
-        inflateInfos.clear();
-    }
+
+
+
+
 
 }

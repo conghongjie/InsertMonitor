@@ -9,10 +9,7 @@ import com.elvis.android.insert_monitor.obj.AbsInfo;
 
 public interface IUIAnalysis {
 
-    void setInstance();
+    void setNowAnalysis();
 
     void onData(String info);
-
-    void clearData();
-
 }

@@ -1,25 +1,17 @@
 package com.elvis.android.insert_monitor.ui.windows;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.elvis.android.insert_monitor.obj.info.BaseInfo;
-import com.elvis.android.insert_monitor.obj.info.BlockInfo;
-import com.elvis.android.insert_monitor.obj.info.SMInfo;
 import com.elvis.android.insert_monitor.ui.R;
 import com.elvis.android.insert_monitor.ui.UIAnalysisImpl;
-
-import java.util.ArrayList;
 
 /**
  * Created by conghongjie on 2017/12/22.

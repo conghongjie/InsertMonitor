@@ -7,17 +7,10 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 
-import com.elvis.android.insert_monitor.obj.info.BaseInfo;
-import com.elvis.android.insert_monitor.obj.info.BlockInfo;
-import com.elvis.android.insert_monitor.obj.info.DBInfo;
-import com.elvis.android.insert_monitor.obj.info.InflateInfo;
-import com.elvis.android.insert_monitor.obj.info.SMInfo;
 import com.elvis.android.insert_monitor.ui.R;
 import com.elvis.android.insert_monitor.ui.UIAnalysisImpl;
 import com.elvis.android.insert_monitor.ui.view.SwitchButton;
 import com.elvis.android.insert_monitor.ui.windows.MonitorWindow;
-
-import java.util.ArrayList;
 
 /**
  * Created by conghongjie on 2018/7/3.

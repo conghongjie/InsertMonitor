@@ -13,7 +13,6 @@ import com.elvis.android.insert_monitor.collect.normal.BaseCollector;
 import com.elvis.android.insert_monitor.collect.normal.FrameCollector;
 import com.elvis.android.insert_monitor.data.InsertMonitorDataHandler;
 import com.elvis.android.insert_monitor.obj.AbsInfo;
-import com.elvis.android.insert_monitor.ui.UIAnalysisWrapper;
 import com.elvis.android.insert_monitor.utils.ProcessUtils;
 
 
@@ -43,7 +42,6 @@ public class CollectorManager {
         }
         //初始化参数
         int targetPid = android.os.Process.myPid();
-        Log.e("ElvisKK_1","targetPid:"+targetPid);
         ISender aidlSender = new ISender() {
             @Override
             public void send(AbsInfo info, boolean isUpload) {
@@ -74,17 +72,17 @@ public class CollectorManager {
         }
         //参数
         int targetPid = ProcessUtils.getMainProcessPid(context);
-        Log.e("ElvisKK_2","targetPid:"+targetPid);
         ISender iSender = new ISender() {
             @Override
             public void send(AbsInfo info, boolean isUpload) {
-                InsertMonitorDataHandler.handleSelfData(info,isUpload);
+                InsertMonitorDataHandler nowDataHandler = InsertMonitorDataHandler.getNowDataHandler();
+                if (nowDataHandler!=null){
+                    nowDataHandler.handleSelfData(info,isUpload);
+                }
             }
         };
         //关闭
         BaseCollector.stop();
-        //数据清除
-        UIAnalysisWrapper.getInstance().clearData();
         //采集
         BaseCollector.start(iSender,context,targetPid);
         return true;
